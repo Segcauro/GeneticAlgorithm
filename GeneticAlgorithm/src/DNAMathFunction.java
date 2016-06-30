@@ -1,8 +1,8 @@
 import java.util.Random;
 
-import GALibary.DNAInterface;
+import Framework.IDNA;
 
-public class DNAMathFunction implements DNAInterface{
+public class DNAMathFunction implements IDNA{
 
 	private String[] DNA = new String[5];
 	private int DNALength = 5;
@@ -14,10 +14,6 @@ public class DNAMathFunction implements DNAInterface{
 		}
 	}
 	
-	public void setDNA(String[] dna) {
-		DNA = dna;
-	}
-
 	public double getFitness() {
 		int a = Integer.parseInt(DNA[0]);
 		int b = Integer.parseInt(DNA[1]);
@@ -30,7 +26,7 @@ public class DNAMathFunction implements DNAInterface{
 		return fitness;
 	}
 
-	public void setDNARandom() {
+	public void setRandomDNA() {
 		Random random = new Random();
 		int min = 0;
 		int max = 10;
@@ -40,6 +36,9 @@ public class DNAMathFunction implements DNAInterface{
 			DNA[i] = Value;
 		}
 		
+	}
+	public void setDNA(String[] dna) {
+		DNA = dna;
 	}
 
 }

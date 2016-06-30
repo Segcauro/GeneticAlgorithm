@@ -1,8 +1,9 @@
-package GALibary;
+package Framework;
 
-public interface DNAInterface {
+public interface IDNA {
 	
 	public void setDNA(String[] DNAValues);
+	public void setRandomDNA();
 	public double getFitness();
 	
 }

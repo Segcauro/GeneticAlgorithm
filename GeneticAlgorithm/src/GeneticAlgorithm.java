@@ -1,4 +1,4 @@
-import GALibary.Settings;
+import Framework.Settings;
 
 public class GeneticAlgorithm {
 	
@@ -17,7 +17,7 @@ public class GeneticAlgorithm {
 		
 		for(int i = 0; i < 50; i++){
 			DNAMathFunction individuum = new DNAMathFunction();
-			individuum.setDNARandom();
+			individuum.setRandomDNA();
 			Population[i] = individuum;
 		}
 		
