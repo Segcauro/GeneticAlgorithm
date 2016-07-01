@@ -65,19 +65,12 @@ public class DynamicPlot extends ApplicationFrame{
         return result;
     }
 	
-    public void plot(int gerneration){
+    public void plot(int gerneration, double fitness){
     	 final double factor = 0.90 + 0.2 * Math.random();
          this.lastValue = this.lastValue * factor;
          final Millisecond now = new Millisecond();
-         System.out.println("Now = " + now.toString());
-         this.series.add(gerneration, this.lastValue);
+         this.series.add(gerneration, fitness);
     }
-    
-    /**
-     * Starting point for the demonstration application.
-     *
-     * @param args  ignored.
-     */
     
     
     /*

@@ -2,7 +2,7 @@ import java.util.Random;
 
 import Framework.IDNA;
 
-public class DNAMathFunction implements IDNA{
+public class DNAMathFunction implements IDNA, Comparable{
 
 	private String[] DNA = new String[5];
 	private int DNALength = 5;
@@ -41,4 +41,19 @@ public class DNAMathFunction implements IDNA{
 		DNA = dna;
 	}
 
+
+
+	@Override
+	public int compareTo(Object o) {
+
+		DNAMathFunction object = (DNAMathFunction) o;
+		
+		if(object.getFitness() < this.getFitness()){	
+			return 1;
+		}else if (object.getFitness() > this.getFitness()){
+			return -1;
+		}else {
+			return 0;
+		}	
+	}
 }

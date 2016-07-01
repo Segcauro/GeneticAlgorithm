@@ -1,4 +1,9 @@
 
+import java.util.Iterator;
+import java.util.NavigableSet;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import org.jfree.ui.RefineryUtilities;
 
 import Framework.Settings;
@@ -8,7 +13,9 @@ public class GeneticAlgorithm {
 	private DynamicPlot demo;
 	private Settings Settings;
 	private int Genertation = 0;
-	private DNAMathFunction[] Population = new DNAMathFunction[50];
+	
+	// Create the sorted set
+    NavigableSet<DNAMathFunction> PopulationSet = new TreeSet(); 
 	
 	public GeneticAlgorithm (Settings settings){
 		Settings = settings;
@@ -16,11 +23,14 @@ public class GeneticAlgorithm {
 	
 	public void startAlgorithm() throws InstantiationException, IllegalAccessException{
 		startPlotting();
-		for(int i = 0; i < 1000; i++){
-			initialPopulation();
-			printPopulation();
-			demo.plot(Genertation);
+		initialPopulation();	
+		
+		for(int i = 1; i <= 50; i++){
+			
+			DNAMathFunction o = PopulationSet.pollLast();
+			demo.plot(Genertation, o.getFitness());
 			Genertation += 1;
+			
 		}
 	}
 	
@@ -35,17 +45,10 @@ public class GeneticAlgorithm {
 		for(int i = 0; i < 50; i++){
 			DNAMathFunction individuum = new DNAMathFunction();
 			individuum.setRandomDNA();
-			Population[i] = individuum;
+			PopulationSet.add(individuum);
 		}
 	}
-	//Helpermethode for Developer Testing
-	private void printPopulation(){
-		for(int i = 0; i < Population.length; i++){
-			Population[i].printDNA();
-			System.out.print(" --> ");
-			System.out.println(Population[i].getFitness());
-		}
-	}
+
 	private DNAMathFunction selectFittest(){
 	
 		DNAMathFunction[] Fittest = new DNAMathFunction[10];
