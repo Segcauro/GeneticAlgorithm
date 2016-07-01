@@ -1,36 +1,40 @@
-
 import java.util.Iterator;
 import java.util.NavigableSet;
-import java.util.SortedSet;
+import java.util.Random;
 import java.util.TreeSet;
-
 import org.jfree.ui.RefineryUtilities;
-
 import Framework.Settings;
 
 public class GeneticAlgorithm {
 	
 	private DynamicPlot demo;
-	private Settings Settings;
-	private int Genertation = 0;
-	
-	// Create the sorted set
-    NavigableSet<DNAMathFunction> PopulationSet = new TreeSet(); 
-	
-	public GeneticAlgorithm (Settings settings){
-		Settings = settings;
+	private int Generation = 0;
+	private double MutationRate;
+	private int NumberOfSurvivalInGeneration;
+	private int PopulationSize;
+    private NavigableSet<DNAMathFunction> PopulationSet = new TreeSet(); 
+    private NavigableSet<DNAMathFunction> FittestOfPopulationSet = new TreeSet(); 
+    
+	public GeneticAlgorithm (Settings Settings){
+		MutationRate = Settings.getMutationRate();
+		PopulationSize = Settings.getPopulationSize();
+		NumberOfSurvivalInGeneration = Settings.getNumberOfSurvivalInGeneration();
 	}
 	
-	public void startAlgorithm() throws InstantiationException, IllegalAccessException{
+	public void initilizeAlgorithm() throws InstantiationException, IllegalAccessException{
 		startPlotting();
 		initialPopulation();	
+		startAlgorithm();
 		
-		for(int i = 1; i <= 50; i++){
-			
-			DNAMathFunction o = PopulationSet.pollLast();
-			demo.plot(Genertation, o.getFitness());
-			Genertation += 1;
-			
+	}
+	private void startAlgorithm(){
+		
+		while(true){
+			selectFittest();
+			demo.plot(Generation, FittestOfPopulationSet.last().getFitness());
+			Generation += 1;
+			emptyOldPopulation();
+			createNewPopulation();
 		}
 	}
 	
@@ -42,24 +46,87 @@ public class GeneticAlgorithm {
 	}
 	
 	private void initialPopulation(){
-		for(int i = 0; i < 50; i++){
+		for(int i = 0; i < PopulationSize; i++){
 			DNAMathFunction individuum = new DNAMathFunction();
 			individuum.setRandomDNA();
 			PopulationSet.add(individuum);
 		}
 	}
 
-	private DNAMathFunction selectFittest(){
+	private void selectFittest(){
+		for(int i = 0; i < NumberOfSurvivalInGeneration; i++){
+			FittestOfPopulationSet.add(PopulationSet.pollLast());
+		}
+	}
+	private void emptyOldPopulation(){
+		
+		PopulationSet.clear();
+		
+	}
 	
-		DNAMathFunction[] Fittest = new DNAMathFunction[10];
+	private void createNewPopulation(){
+		fillInFittestOfPreviousGeneration();
+		fillPopulationWithNewIndividuen();
+	}
+	
+	private void fillInFittestOfPreviousGeneration(){
+		
+		PopulationSet.addAll(FittestOfPopulationSet);	
+		FittestOfPopulationSet.clear();
+	}
+	
+	private void fillPopulationWithNewIndividuen(){
+		Random random = new Random();
+		int min = 0;
+		int max = (PopulationSet.size() - 1 );
+		//Da ein Zugriff auf einen Index in dem Set nicht erlaubt ist, wird 
+		//Set in einen Array überführt.
+		NavigableSet<DNAMathFunction> TemporaryPopulationSet = new TreeSet();
+		TemporaryPopulationSet.addAll(PopulationSet);
+		DNAMathFunction[] ArryWithFittest = new DNAMathFunction[PopulationSet.size()];
+		for(int i = 0; i < PopulationSet.size(); i++){
+			ArryWithFittest[i] = TemporaryPopulationSet.pollFirst();
+		}
+		
+		//Die Besten Individuen sind nun im Array
+		//Nach Zufall werden die leeren 45 Generationplätze mit Fitten besetzt.
+		while(PopulationSet.size() < PopulationSize){
+			int index = random.nextInt(max - min + 1) + min;
+			DNAMathFunction newIndividuum = ArryWithFittest[index];
+			PopulationSet.add(mutateIndividuum(newIndividuum));
+		}
+	}
+	/*
+	private void crossOver(NavigableSet<DNAMathFunction> Population){
+		DNAMathFunction[] DNASource = new DNAMathFunction[Population.size()];
+		int DNALength = Population.last().getDNALength();
+		Random random = new Random();
+		int min = 0;
+		int max = (Population.size() - 1 );
+		for(int i = 0; i < Population.size(); i++){
+			DNASource[i] = Population.pollLast();
+		}
+		
+		while(Population.size() < PopulationSize){
+			DNAMathFunction newIndividum;
+			String[] newDNA = new String[DNALength];
+			int HostIndividum_1 = random.nextInt(max - min + 1) + min;
+			int HostIndividum_2 = random.nextInt(max - min + 1) + min;
 			
-		return null;
+		}
 	}
-	
-	private void crossOver(){
-		
-	}
-	private void mutatePopulation(){
-		
+	*/
+	private DNAMathFunction mutateIndividuum(DNAMathFunction Individuum){
+		Random willValueMutate = new Random();
+		int min = 1;
+		int max = 100;
+		int mutatetionTreshold = (int) (MutationRate * 100);
+				
+		for(int i = 0; i < Individuum.getDNALength(); i++){
+			if((willValueMutate.nextInt(max - min + 1) + min) <= mutatetionTreshold){
+				Individuum.setRandomAllel(i);
+			}
+		}
+		return Individuum;
 	}
 }
