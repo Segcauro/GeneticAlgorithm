@@ -2,16 +2,17 @@ import java.util.Random;
 
 import Framework.IDNA;
 
-public class DNAMathFunction implements IDNA, Comparable{
+public class DNAMathFunction implements IDNA, Comparable, java.io.Serializable{
 
-	private String[] DNA = new String[8];
-	private int DNALength = 8;
+	private String[] DNA = new String[11];
+	private int DNALength = 11;
 	private String[] DNAValues = {"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
 	private int numberOfDNAValues = DNAValues.length - 1;
 	
 	public void printDNA(){
 		for(int i = 0; i < DNA.length; i++){
 			System.out.print(DNA[i]);
+			System.out.print("	");
 		}
 	}
 	
@@ -24,8 +25,11 @@ public class DNAMathFunction implements IDNA, Comparable{
 		int f = Integer.parseInt(DNA[5]);
 		int g = Integer.parseInt(DNA[6]);
 		int h = Integer.parseInt(DNA[7]);
+		int i = Integer.parseInt(DNA[8]);
+		int j = Integer.parseInt(DNA[9]);
+		int k = Integer.parseInt(DNA[10]);
 		
-		int fitness = (h * g * f)^2 + (-10*a^5) + (22*b^4)+ (100*c^3) - (11*d^2) + (200*e) - (1200);
+		int fitness = (i * j * k) - (h * (g/2) * f)^2 + (-10*a^5) + (22*b^4)+ (100*c^3) - (11*d^2) + (200*e) - (1200);
 		
 		return fitness;
 	}
