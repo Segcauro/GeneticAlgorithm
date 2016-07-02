@@ -102,9 +102,6 @@ public class GeneticAlgorithm {
 		System.out.println(" --- New Individuums --");
 		while(PopulationSet.size() < PopulationSize){
 			int index = random.nextInt(max - min + 1) + min;
-			
-			//Hier liegt der Hund begraben!
-			//DNAMathFunction newIndividuum = ArryWithFittest[index];
 			DNAMathFunction newIndividuum = (DNAMathFunction) DeepCopy.copy(ArryWithFittest[index]);
 			
 			PopulationSet.add(mutateIndividuum(newIndividuum));
@@ -137,10 +134,10 @@ public class GeneticAlgorithm {
 		Random willValueMutate = new Random();
 		int min = 1;
 		int max = 100;
-		int mutatetionTreshold = (int) (MutationRate * 100);
+		int mutationTreshold = (int) (MutationRate * 100);
 				
 		for(int i = 0; i < Individuum.getDNALength(); i++){
-			if((willValueMutate.nextInt(max - min + 1) + min) <= mutatetionTreshold){
+			if((willValueMutate.nextInt(max - min + 1) + min) <= mutationTreshold){
 				Individuum.setRandomAllel(i);
 			}
 		}
