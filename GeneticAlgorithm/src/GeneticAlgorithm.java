@@ -30,7 +30,6 @@ public class GeneticAlgorithm {
 		
 	}
 	private void startAlgorithm(){
-		
 		while(true){
 			selectFittest();
 			demo.plot(Generation, FittestOfPopulationSet.last().getFitness());

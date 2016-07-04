@@ -13,5 +13,4 @@ public class Main {
 		geneticAlgorithm.initilizeAlgorithm();
 		
 	}
-
 }

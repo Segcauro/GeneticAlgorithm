@@ -29,9 +29,7 @@ public class DNAMathFunction implements IDNA, Comparable, java.io.Serializable{
 		int j = Integer.parseInt(DNA[9]);
 		int k = Integer.parseInt(DNA[10]);
 		
-		
-		
-		int fitness = (i * j * k) - (h * (g/2) * f)^2 + (-10*a^5) + (22*b^4)+ (100*c^3) - (11*d^2) + (200*e) - (1200);
+		int fitness = (((i ^ e) * (j ^ b) * (k)) * (a^(c-d))) - (h * (g/2) * f)^d + (-10*a^h) + (22*b^(j-i))+ (100*c^(i-a)) - (11*d^2) + (200^(e-f)) - (1200);
 		
 		return fitness;
 	}
