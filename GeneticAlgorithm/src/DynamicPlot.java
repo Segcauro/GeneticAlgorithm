@@ -40,7 +40,7 @@ public class DynamicPlot extends ApplicationFrame{
         this.series = new XYSeries("Fittest of Generation", true, true);
         final XYSeriesCollection dataset = new XYSeriesCollection(this.series);
         final JFreeChart chart = createChart(dataset);
-//fgjdfzhjsghddsz
+
         final ChartPanel chartPanel = new ChartPanel(chart);
         final JButton saveImage = new JButton("Save Image");
         final JPanel content = new JPanel(new BorderLayout());

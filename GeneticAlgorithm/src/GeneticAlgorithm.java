@@ -92,10 +92,25 @@ public class GeneticAlgorithm {
 		//Die Besten Individuen sind nun im Array
 		//Nach Zufall werden die leeren 45 Generationpl√§tze mit Fitten besetzt.
 		while(PopulationSet.size() < PopulationSize){
-			int index = random.nextInt(max - min + 1) + min;
-			DNAMathFunction newIndividuum = (DNAMathFunction) DeepCopy.copy(ArryWithFittest[index]);
+			int index1 = random.nextInt(max - min + 1) + min;
+			int index2 = random.nextInt(max - min + 1) + min;
+			//zwei zuf‰llige Individuen werden ausgew‰hlt und zu einem neuen rekombiniert
+			DNAMathFunction newIndividuum = combineIndividuen((DNAMathFunction) DeepCopy.copy(ArryWithFittest[index1]), (DNAMathFunction) DeepCopy.copy(ArryWithFittest[index2]));
 			PopulationSet.add(mutateIndividuum(newIndividuum));
 		}
+	}
+	
+	//Rekombination
+	private DNAMathFunction combineIndividuen(DNAMathFunction Individuum1, DNAMathFunction Individuum2)
+	{
+		for(int i = 0; i < Individuum1.getDNALength(); i++)
+		{
+			if(Math.random() < 0.5)
+			{
+				Individuum1.setAllele(i, Individuum2.getAllele(i));
+			}
+		}
+		return Individuum1;
 	}
 
 	private DNAMathFunction mutateIndividuum(DNAMathFunction Individuum){
