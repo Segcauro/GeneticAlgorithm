@@ -5,7 +5,7 @@ public class Main {
 	public static void main (String[] args) throws InstantiationException, IllegalAccessException {
 		
 		Settings Settings = new Settings();
-		Settings.setMutationRate(0.01);
+		Settings.setMutationRate(0.03);
 		Settings.setPopulationSize(50);
 		Settings.setNumberOfSurvivalInGeneration(5);
 		

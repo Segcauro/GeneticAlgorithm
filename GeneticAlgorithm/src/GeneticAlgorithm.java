@@ -91,44 +91,13 @@ public class GeneticAlgorithm {
 		
 		//Die Besten Individuen sind nun im Array
 		//Nach Zufall werden die leeren 45 Generationplätze mit Fitten besetzt.
-		System.out.println("--- Fittest of Population ---");
-		Iterator<DNAMathFunction> devTest = PopulationSet.iterator();
-		while(devTest.hasNext()){
-			DNAMathFunction testObject = devTest.next();
-			testObject.printDNA();
-			System.out.println(" Fitness: " + testObject.getFitness());
-		}
-		System.out.println(" --- New Individuums --");
 		while(PopulationSet.size() < PopulationSize){
 			int index = random.nextInt(max - min + 1) + min;
 			DNAMathFunction newIndividuum = (DNAMathFunction) DeepCopy.copy(ArryWithFittest[index]);
-			
 			PopulationSet.add(mutateIndividuum(newIndividuum));
-			newIndividuum.printDNA();
-			System.out.print(" Fitness: " + newIndividuum.getFitness());
-			System.out.println("	Populationsize: " + PopulationSet.size());
 		}
 	}
-	/*
-	private void crossOver(NavigableSet<DNAMathFunction> Population){
-		DNAMathFunction[] DNASource = new DNAMathFunction[Population.size()];
-		int DNALength = Population.last().getDNALength();
-		Random random = new Random();
-		int min = 0;
-		int max = (Population.size() - 1 );
-		for(int i = 0; i < Population.size(); i++){
-			DNASource[i] = Population.pollLast();
-		}
-		
-		while(Population.size() < PopulationSize){
-			DNAMathFunction newIndividum;
-			String[] newDNA = new String[DNALength];
-			int HostIndividum_1 = random.nextInt(max - min + 1) + min;
-			int HostIndividum_2 = random.nextInt(max - min + 1) + min;
-			
-		}
-	}
-	*/
+
 	private DNAMathFunction mutateIndividuum(DNAMathFunction Individuum){
 		Random willValueMutate = new Random();
 		int min = 1;

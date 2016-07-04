@@ -1,7 +1,11 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -30,9 +34,6 @@ public class DynamicPlot extends ApplicationFrame{
     /** The time series data. */
     private XYSeries series;
 
-    /** The most recent value added. */
-    private double lastValue = 100.0;
-
     public DynamicPlot(final String title) {
 
         super(title);
@@ -41,10 +42,32 @@ public class DynamicPlot extends ApplicationFrame{
         final JFreeChart chart = createChart(dataset);
 
         final ChartPanel chartPanel = new ChartPanel(chart);
-
+        final JButton saveImage = new JButton("Save Image");
         final JPanel content = new JPanel(new BorderLayout());
+        saveImage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BufferedImage image = chart.createBufferedImage(720,576);
+				int index = 1;
+				boolean imageSafed = false;
+				while(imageSafed == false){
+					File outputfile = new File("GeneticAlgorithmGraph_" + index +".png");
+			        if(!outputfile.exists()) { 
+			        	try {
+							ImageIO.write(image, "png", outputfile);
+							imageSafed = true;
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+			        }else{
+			        	index++;
+			        }
+				}
+			}
+		});
         content.add(chartPanel);
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        content.add(saveImage, BorderLayout.SOUTH);
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 350));
         setContentPane(content);
 
     }
@@ -68,17 +91,4 @@ public class DynamicPlot extends ApplicationFrame{
     public void plot(int gerneration, double fitness){
          this.series.add(gerneration, fitness);
     }
-    
-    
-    /*
-    public static void main(final String[] args) {
-
-        final DynamicPlot demo = new DynamicPlot("Dynamic Data Demo");
-        demo.pack();
-        RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);
-
-    }
-    */
-
 }
