@@ -93,7 +93,12 @@ public class GeneticAlgorithm {
 		//Nach Zufall werden die leeren 45 Generationpl√§tze mit Fitten besetzt.
 		while(PopulationSet.size() < PopulationSize){
 			int index1 = random.nextInt(max - min + 1) + min;
-			int index2 = random.nextInt(max - min + 1) + min;
+			int index2;
+			//verhindert dass ein Individum mit sich selbst gekreuzt wird.
+			do{
+				index2 = random.nextInt(max - min + 1) + min;
+			}while(index1 == index2);
+			
 			//zwei zuf‰llige Individuen werden ausgew‰hlt und zu einem neuen rekombiniert
 			DNAMathFunction newIndividuum = combineIndividuen((DNAMathFunction) DeepCopy.copy(ArryWithFittest[index1]), (DNAMathFunction) DeepCopy.copy(ArryWithFittest[index2]));
 			PopulationSet.add(mutateIndividuum(newIndividuum));
