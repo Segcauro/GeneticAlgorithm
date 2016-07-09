@@ -2,13 +2,13 @@ package Framework;
 
 public interface IDNA {
 	
-	public void setDNA(String[] DNAValues);
+	public void setDNA(double[] DNAValues);
 	public void setRandomDNA();
 	public void setRandomAllel(int Index);
-	public void setAllele(int Index, String Value);
+	public void setAllele(int Index, double Value);
 	public double getFitness();
-	public String[] getDNA();
-	public String getAllele(int Index);
+	public double[] getDNA();
+	public double getAllele(int Index);
 	public int getDNALength();
 	public int compareTo(Object o);
 	public void printDNA();

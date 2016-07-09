@@ -68,7 +68,7 @@ public class GeneticAlgorithm <DNAClassType extends IDNA> {
 	private void selectFittest(){
 		for(int i = 0; i < NumberOfSurvivalInGeneration; i++)
 		{
-			FittestOfPopulationSet.add(PopulationSet.pollLast());
+			FittestOfPopulationSet.add(PopulationSet.last());
 		}
 	}
 	private void emptyOldPopulation(){
@@ -116,7 +116,7 @@ public class GeneticAlgorithm <DNAClassType extends IDNA> {
 		}
 	}
 	
-	//Rekombination
+	//Recombination
 	private DNAClassType combineIndividuen(DNAClassType dnaClassType, DNAClassType dnaClassType2)
 	{
 		for(int i = 0; i < dnaClassType.getDNALength(); i++)
