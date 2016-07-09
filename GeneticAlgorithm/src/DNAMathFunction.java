@@ -32,21 +32,12 @@ public class DNAMathFunction implements IDNA, Comparable, java.io.Serializable{
 		//int value1 = (c * (a-7) + 9) *  (f+3)+i*4 - (j-5);
 		//int value1 = (int)( Math.pow((a-2), 2) + Math.pow((b-3),2) - 1);
 		int value1 = 2;
-		int value2 = (int)( Math.pow((a-4), 2) + Math.pow((b-2),2) - 4);
+		int fitness = (int)( Math.pow((a-4), 2) + Math.pow((b-2),2) - 4);
 		//int value2 = (4* (b-d)+e)* (6+g)+1*h - (8-k);
 		//int value2 = a+b+c+d+e+f+g+h+i+j+k;
 		//(x-2)^2+(y-3)^2-1 = (x-4)^2+(y-2)^2-4
 		
-		int fitness = value1 - value2;
-		if(fitness < 0)
-		{
-			fitness*=(-1);
-		}
-		//int fitness = (((i ^ e) * (j ^ b) * (k)) * (a^(c-d))) - (h * (g/2) * f)^d + (-10*a^h) + (22*b^(j-i))+ (100*c^(i-a)) - (11*d^2) + (200^(e-f)) - (1200);
-		
-		//return fitness * Math.cos(a - d) * Math.sin(b - k) * Math.sin(j - g) * Math.sin(i - e);
-		
-		return fitness;
+		return fitness * Math.cos(a - d) * Math.sin(b - k) * Math.sin(j - g);
 	}
 
 	public void setRandomDNA() {
@@ -88,9 +79,9 @@ public class DNAMathFunction implements IDNA, Comparable, java.io.Serializable{
 
 		DNAMathFunction object = (DNAMathFunction) o;
 		
-		if(object.getFitness() > this.getFitness()){
+		if(object.getFitness() < this.getFitness()){
 			return 1;
-		}else if (object.getFitness() < this.getFitness()){
+		}else if (object.getFitness() > this.getFitness()){
 			return -1;
 		}else {
 			return 0;

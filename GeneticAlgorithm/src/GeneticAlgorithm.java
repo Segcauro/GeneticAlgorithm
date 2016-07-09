@@ -104,35 +104,29 @@ public class GeneticAlgorithm <DNAClassType extends IDNA> {
 		while(PopulationSet.size() < PopulationSize)
 		{
 			int index1 = random.nextInt(max - min + 1) + min;
-<<<<<<< HEAD
 			int index2;
 			//verhindert dass ein Individum mit sich selbst gekreuzt wird.
 			do{
 				index2 = random.nextInt(max - min + 1) + min;
 			}while(index1 == index2);
 			
-			//zwei zufällige Individuen werden ausgewählt und zu einem neuen rekombiniert
-			DNAMathFunction newIndividuum = combineIndividuen((DNAMathFunction) DeepCopy.copy(ArryWithFittest[index1]), (DNAMathFunction) DeepCopy.copy(ArryWithFittest[index2]));
-=======
-			int index2 = random.nextInt(max - min + 1) + min;
 			//zwei zufï¿½llige Individuen werden ausgewï¿½hlt und zu einem neuen rekombiniert
 			DNAClassType newIndividuum = combineIndividuen((DNAClassType) DeepCopy.copy(ArryWithFittest[index1]), (DNAClassType) DeepCopy.copy(ArryWithFittest[index2]));
->>>>>>> origin/master
 			PopulationSet.add(mutateIndividuum(newIndividuum));
 		}
 	}
 	
 	//Rekombination
-	private DNAClassType combineIndividuen(DNAClassType Individuum1, DNAClassType Individuum2)
+	private DNAClassType combineIndividuen(DNAClassType dnaClassType, DNAClassType dnaClassType2)
 	{
-		for(int i = 0; i < Individuum1.getDNALength(); i++)
+		for(int i = 0; i < dnaClassType.getDNALength(); i++)
 		{
 			if(Math.random() < 0.5)
 			{
-				Individuum1.setAllele(i, Individuum2.getAllele(i));
+				dnaClassType.setAllele(i, dnaClassType2.getAllele(i));
 			}
 		}
-		return Individuum1;
+		return dnaClassType;
 	}
 
 	private DNAClassType mutateIndividuum(DNAClassType Individuum)
