@@ -1,3 +1,6 @@
+Nico schau mal in deine Mails :D Mein Handy ist kaput
+
+
 # GeneticAlgorithm
 
 Die Idee ist es, ein möglichst flexibles Framework zur Erstellung genetische Algorithmen zu programmieren. Um das Framework pflegbar zu halten, sollten daher folgende Punkte bei der Programmierung beachtet werden: 
