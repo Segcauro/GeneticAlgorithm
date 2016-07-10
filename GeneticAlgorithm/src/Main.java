@@ -9,7 +9,7 @@ public class Main {
 		Settings.setPopulationSize(50);
 		Settings.setNumberOfSurvivalInGeneration(5);
 		
-		GeneticAlgorithm<DNAMathFunction> geneticAlgorithm = new GeneticAlgorithm(Settings, DNAMathFunction.class);
+		GeneticAlgorithm<DNAAlphabet> geneticAlgorithm = new GeneticAlgorithm(Settings, DNAAlphabet.class);
 		geneticAlgorithm.initilizeAlgorithm();
 		
 	}

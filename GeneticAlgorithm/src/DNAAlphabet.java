@@ -3,7 +3,7 @@ import java.util.Random;
 
 import Framework.IDNA;
 
-public class DNAMathFunction implements IDNA, Comparable, java.io.Serializable{
+public class DNAAlphabet implements IDNA, Comparable, java.io.Serializable{
 
 	private String[] DNA = new String[26];
 	private int DNALength = DNA.length;
@@ -76,7 +76,7 @@ public class DNAMathFunction implements IDNA, Comparable, java.io.Serializable{
 	@Override
 	public int compareTo(Object o) {
 
-		DNAMathFunction object = (DNAMathFunction) o;
+		DNAAlphabet object = (DNAAlphabet) o;
 		
 		if(object.getFitness() < this.getFitness()){
 			return 1;
