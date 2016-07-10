@@ -119,13 +119,13 @@ public class GeneticAlgorithm <DNAClassType extends IDNA> {
 	//Rekombination
 	private DNAClassType combineIndividuen(DNAClassType dnaClassType, DNAClassType dnaClassType2)
 	{
-		for(int i = 0; i < dnaClassType.getDNALength(); i++)
+		/*for(int i = 0; i < dnaClassType.getDNALength(); i++)
 		{
 			if(Math.random() < 0.5)
 			{
 				dnaClassType.setAllele(i, dnaClassType2.getAllele(i));
 			}
-		}
+		}*/
 		return dnaClassType;
 	}
 
